@@ -10,7 +10,7 @@ const messageList = document.getElementById('message-list');
 
 fetchButton.addEventListener('click', async () => {
   try {
-    const response = await fetch(`${serverURL}/messages`);
+    const response = await fetch(`${serverUrl}/messages`);
     if (!response.ok) {
       throw new Error('Network response was not OK');
     }
