@@ -1,24 +1,31 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
 
-setupCounter(document.querySelector('#counter'))
+
+const serverUrl = 'http://localhost:8080'; // local testing
+
+// const serverUrl = 'https:// RENDER SPACE' ; // for deployment
+
+const fetchButton = document.getElementById('fetch-button');
+const messageList = document.getElementById('message-list');
+
+fetchButton.addEventListener('click', async () => {
+  try {
+    const response = await fetch(`${serverURL}/messages`);
+    if (!response.ok) {
+      throw new Error('Network response was not OK');
+    }
+    const data = await response.json();
+
+    messageList.innerHTML = '';
+
+    data.forEach(message => {
+      const li = document.createElement('li');
+      li.textContent = message.text;
+      messageList.appendChild(li);
+    });
+    
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    messageList.innerHTML = '<li>Error loading messages>/li>';
+  }
+});
