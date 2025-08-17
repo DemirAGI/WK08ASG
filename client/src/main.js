@@ -1,9 +1,9 @@
 
 
 
-const serverUrl = 'http://localhost:8080'; // local testing
+// local testing const serverUrl = 'http://localhost:8080'; 
 
-// const serverUrl = 'https:// RENDER SPACE' ; // for deployment
+const serverUrl = 'https://wk08asg.onrender.com' ; // for deployment
 
 const fetchButton = document.getElementById('fetch-button');
 const messageList = document.getElementById('message-list');
@@ -23,7 +23,7 @@ fetchButton.addEventListener('click', async () => {
       li.textContent = message.text;
       messageList.appendChild(li);
     });
-    
+
   } catch (error) {
     console.error('Error fetching data:', error);
     messageList.innerHTML = '<li>Error loading messages>/li>';
